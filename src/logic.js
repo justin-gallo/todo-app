@@ -1,5 +1,5 @@
-let toDoItems = [];
-let parents = ["index"];
+export let toDoItems = [];
+export let parents = ["index"];
 
 //Create a new toDo object
 class ToDo {
