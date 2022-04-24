@@ -52,6 +52,36 @@ main {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+}
+
+.task {
+    width: 100%;
+    background-color: rgb(234, 234, 234);
+    height: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.task > p:first-child {
+    padding-left: 1rem;
+    margin-right: auto;
+}
+
+.task > p:nth-child(2) {
+    padding-right: 5vw;
+    font-style: italic;
+}
+
+.task > p:nth-child(3) {
+    padding-right: 1rem;
+    font-weight: bold;
 }
 
 footer {
