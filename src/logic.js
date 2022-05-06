@@ -1,37 +1,46 @@
-export let toDoItems = [];
-export let projects = ["index"];
+import {projects} from "./index";
 
-//Create a new toDo object
-class ToDo {
-    constructor(title, description, dueDate, priority) {
-        this.project = 'index' //new tasks are by default created in the "index"
-        this.title = title
-        this.description = description
-        this.dueDate = dueDate
-        this.priority = priority
-        this.complete = false //Tasks are created with the default state of "not completed"
-    }
-}
-
+//Create a new task in the active project
 function createNewToDo(title, description, dueDate, priority) {
-    let newToDo = new ToDo(title, description, dueDate, priority);
-    toDoItems.push(newToDo);
+    _clearActiveProjects();
+    getActiveProject().tasks.push({
+        title, 
+        description, 
+        dueDate, 
+        priority, 
+        complete: false,
+    })
 }
+
 
 function createProject(name) {
-    projects.indexOf(name) === -1 ? projects.push(name): 0; //if the new project doesn't already exist, add it to the projects array
+    _clearActiveProjects();
+    projects.push({
+        name, 
+        tasks: [],
+        active: true,
+    })
 }
 
-function changeProject(index, newProject) {
-    if (projects.indexOf(newProject) !== -1) {
-        toDoItems[index].project = newProject;
+function getActiveProject() {
+    let activeProjects = projects.filter(project => project.active);
+    return activeProjects[0];
+}
+
+function _clearActiveProjects() {
+    projects.forEach(project => project.active = false);
+}
+
+function toggleComplete(index) {
+    if (getActiveProject().tasks[index].complete === false) {
+        getActiveProject.tasks[index].complete = true;
+    } else {
+        getActiveProject.tasks[index].complete = false;
     }
 }
 
-function markComplete(index) {
-    if (toDoItems[index].complete === false) {
-        toDoItems[index].complete = true;
-    }
+function deleteTask(index) {
+    getActiveProject().tasks.splice(index, 1);
 }
 
-export {createNewToDo, createProject, changeProject, markComplete};
+export {createNewToDo, createProject, changeProject, toggleComplete};
